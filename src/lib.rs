@@ -1,4 +1,7 @@
 #![no_std]
+
+use cpuio::outb;
+
 // Triple buffer everything
 pub enum GModes {}
 
@@ -44,6 +47,13 @@ pub fn prelim_testing() {
             *vga_buffer.offset(i as isize * 2) = byte;
             *vga_buffer.offset(i as isize * 2 + 1) = 0xb;
         }
+    }
+}
+
+pub fn disable_cursor() {
+    unsafe {
+        outb(0x0A, 0x3D4);
+        outb(0x20, 0x3D5);
     }
 }
 
