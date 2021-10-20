@@ -29,11 +29,19 @@ pub enum BuffPoint {
 pub struct GraphicsBufferHandle {
     // Triple buffer??
     // current_buffer
+    pub graphics_mode: GModes,
     pub buffer_pointer: BuffPoint,
     pub current_buff: Buffer,
     pub double_buff: Buffer,
     pub triple_buff: Buffer,
 }
+
+impl GraphicsBufferHandle {
+    pub fn set_mode(&mut self, graphics_mode: GModes) {
+        self.graphics_mode = graphics_mode;
+    }
+}
+
 pub type Buffer = [[RGB; 1440]; 900];
 
 fn put_line(coords_start: Point, coords_end: Point, thickness: f32, color: RGB) {}
