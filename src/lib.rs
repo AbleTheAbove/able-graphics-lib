@@ -23,10 +23,10 @@ pub enum BuffPoint {
 pub struct GraphicsBufferHandle {
     // Triple buffer??
     // current_buffer
-    buffer_pointer: BuffPoint,
-    current_buff: Buffer,
-    double_buff: Buffer,
-    triple_buff: Buffer,
+    pub buffer_pointer: BuffPoint,
+    pub current_buff: Buffer,
+    pub double_buff: Buffer,
+    pub triple_buff: Buffer,
 }
 pub type Buffer = [[RGB; 1440]; 900];
 
