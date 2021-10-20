@@ -3,7 +3,10 @@
 use cpuio::outb;
 
 // Triple buffer everything
-pub enum GModes {}
+pub enum GModes {
+    Vga800x600,
+    Custom(u16, u16),
+}
 
 pub type GCoord = usize;
 pub type RGB = (u32, u32, u32);
