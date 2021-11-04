@@ -1,7 +1,5 @@
 #![no_std]
 
-use cpuio::outb;
-
 // Triple buffer everything
 pub enum GModes {
     Vga800x600,
