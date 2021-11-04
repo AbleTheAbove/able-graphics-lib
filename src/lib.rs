@@ -61,13 +61,6 @@ pub fn prelim_testing() {
     }
 }
 
-pub fn disable_cursor() {
-    unsafe {
-        outb(0x0A, 0x3D4);
-        outb(0x20, 0x3D5);
-    }
-}
-
 #[test]
 fn it_works() {
     let result = 2 + 2;
