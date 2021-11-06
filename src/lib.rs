@@ -17,9 +17,9 @@ pub type Point = (GCoord, GCoord);
 pub struct FrameBuffer;
 
 pub trait Graphics {
-    fn put_line(coords_start: Point, coords_end: Point, thickness: f32, color: RGB);
+    fn put_line(coords_start: Point, coords_end: Point, thickness: u32, color: RGB);
     fn put_rect(coords_start: Point, coords_end: Point, color: RGB);
-    fn put_circle(coords: Point, radius: f32);
+    fn put_circle(coords: Point, radius: u32);
     fn put_pixel(coords: Point, color: RGB);
 
     fn paint_cursor(coords: Point);
