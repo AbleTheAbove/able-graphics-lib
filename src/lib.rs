@@ -1,6 +1,5 @@
 #![no_std]
 
-// Triple buffer everything
 pub enum GModes {
     Vga800x600,
     Custom(u16, u16),
@@ -8,55 +7,25 @@ pub enum GModes {
 
 pub type GCoord = usize;
 pub type RGB = (u32, u32, u32);
-
+pub type RefreshRate = u8;
 pub const REFRESH_RATE: u8 = 60;
 
 pub type Resolution = (usize, usize);
-pub const DEFAULT_RESOLUTION: Resolution = (1440, 900);
 
 pub type Point = (GCoord, GCoord);
 
-fn put_pixel(coords: Point, color: RGB) {}
+pub trait GraphicsBuffer {
+    fn put_line(coords_start: Point, coords_end: Point, thickness: f32, color: RGB);
+    fn put_rect(coords_start: Point, coords_end: Point, color: RGB);
+    fn put_circle(coords: Point, radius: f32);
+    fn put_pixel(coords: Point, color: RGB);
 
-pub enum BuffPoint {
-    Single,
-    Double,
-    Triple,
-}
+    fn paint_cursor(coords: Point);
+    fn hide_cursor();
+    fn show_cursor();
 
-pub struct GraphicsBufferHandle {
-    // Triple buffer??
-    // current_buffer
-    pub graphics_mode: GModes,
-    pub buffer_pointer: BuffPoint,
-    pub current_buff: Buffer,
-    pub double_buff: Buffer,
-    pub triple_buff: Buffer,
-}
-
-impl GraphicsBufferHandle {
-    pub fn set_mode(&mut self, graphics_mode: GModes) {
-        self.graphics_mode = graphics_mode;
-    }
-}
-
-pub type Buffer = [[RGB; 1440]; 900];
-
-fn put_line(coords_start: Point, coords_end: Point, thickness: f32, color: RGB) {}
-fn put_rect(coords_start: Point, coords_end: Point, color: RGB) {}
-fn put_circle(coords: Point, radius: f32) {}
-fn paint_cursor(coords: Point) {}
-
-pub fn prelim_testing() {
-    let vga_buffer = 0xb8000 as *mut u8;
-    let hello: &[u8] = b"Running on x86_64";
-
-    for (i, &byte) in hello.iter().enumerate() {
-        unsafe {
-            *vga_buffer.offset(i as isize * 2) = byte;
-            *vga_buffer.offset(i as isize * 2 + 1) = 0xb;
-        }
-    }
+    fn draw();
+    fn clear();
 }
 
 #[test]
