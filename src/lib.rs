@@ -14,7 +14,9 @@ pub type Resolution = (usize, usize);
 
 pub type Point = (GCoord, GCoord);
 
-pub trait GraphicsBuffer {
+pub struct FrameBuffer;
+
+pub trait Graphics {
     fn put_line(coords_start: Point, coords_end: Point, thickness: f32, color: RGB);
     fn put_rect(coords_start: Point, coords_end: Point, color: RGB);
     fn put_circle(coords: Point, radius: f32);
@@ -23,7 +25,7 @@ pub trait GraphicsBuffer {
     fn paint_cursor(coords: Point);
     fn hide_cursor();
     fn show_cursor();
-
+    /// Actually move the double buffer to the single buffer and "update" the screen
     fn draw();
     fn clear();
 }
